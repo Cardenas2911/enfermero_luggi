@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: 'Lexend', sans-serif;
+    --font-body: 'Lexend', sans-serif;
+
+    --color-primary: #137fec;
+    --color-primary-dark: #0b5cb8;
+    --color-background-light: #f6f7f8;
+    --color-background-dark: #101922;
+    --color-surface-light: #ffffff;
+    --color-surface-dark: #1a2632;
+}
+
+body {
+    font-family: var(--font-body);
+    min-height: max(884px, 100dvh);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
