@@ -1,11 +1,53 @@
 ---
+// src/layouts/Layout.astro
+// Layout principal con SEO avanzado: Open Graph y Schema.org MedicalBusiness
+import { SEO } from "astro-seo";
 import '../styles/global.css';
 
 interface Props {
-	title: string;
+  title: string;
+  description: string;
+  professionalName?: string;
 }
 
-const { title } = Astro.props;
+const { 
+  title, 
+  description, 
+  professionalName = "Luiggi Castañeda" 
+} = Astro.props;
+
+// Schema.org para SEO local enfocado en servicios de salud domiciliarios
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": professionalName,
+  "image": "https://cardenas2911.github.io/enfermero_luiggi/assets/logo.png",
+  "logo": "https://cardenas2911.github.io/enfermero_luiggi/assets/logo.png",
+  "description": description,
+  "url": "https://cardenas2911.github.io/enfermero_luiggi/",
+  "telephone": "+573507871980",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bogotá",
+    "addressRegion": "Cundinamarca",
+    "addressCountry": "CO"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "4.6097",
+    "longitude": "-74.0817"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "sameAs": [
+    "https://wa.me/573507871980"
+  ]
+};
 ---
 
 <!doctype html>
@@ -13,12 +55,46 @@ const { title } = Astro.props;
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>{title}</title>
-    <meta name="description" content="Astro description" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
-    <!-- Fuentes y Tipografía del Theme Stitch -->
+
+    <!-- SEO con Open Graph dinámico -->
+    <SEO
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: "https://cardenas2911.github.io/enfermero_luiggi/assets/logo.png",
+        },
+        optional: {
+          description: description,
+          locale: "es_CO",
+          siteName: "Enfermero Luiggi Castañeda - Cuidado a Domicilio Bogotá",
+        }
+      }}
+      twitter={{
+        creator: "@luiggicuidados",
+        card: "summary_large_image",
+      }}
+      extend={{
+        meta: [
+          { name: "robots", content: "index, follow" },
+          { name: "author", content: professionalName },
+          { name: "keywords", content: "enfermero a domicilio Bogotá, cuidado adulto mayor, enfermería domiciliaria, cuidados post operatorios, Luiggi Castañeda, auxliar de enfermería Bogotá" },
+          { name: "theme-color", content: "#0d9488" },
+        ],
+        link: [
+          { rel: "canonical", href: "https://cardenas2911.github.io/enfermero_luiggi/" },
+        ],
+      }}
+    />
+
+    <!-- Schema.org MedicalBusiness para SEO local -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <!-- Fuentes y Tipografía -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>

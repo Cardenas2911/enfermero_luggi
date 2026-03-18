@@ -1,272 +1,96 @@
 ---
+// src/pages/index.astro
+// Página principal - integra componentes React con secciones Astro existentes
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.jsx';
+import Hero from '../components/Hero.jsx';
+import ServicesGrid from '../components/ServicesGrid.jsx';
+import WhatsAppButton from '../components/WhatsAppButton.jsx';
+import MobileNav from '../components/MobileNav.jsx';
+import TrustBanner from '../components/TrustBanner.jsx';
+import AboutMe from '../components/AboutMe.jsx';
+import Testimonials from '../components/Testimonials.jsx';
+import FAQ from '../components/FAQ.jsx';
+import Footer from '../components/Footer.jsx';
 ---
 
-<Layout title="Enfermero Luggi - Cuidado de Salud y Acompañamiento">
+<Layout
+  title="Enfermero a Domicilio en Bogotá | Luiggi Castañeda - Cuidado Profesional 24/7"
+  description="Servicios de enfermería a domicilio en Bogotá. Cuidado de adulto mayor, post-operatorio, medicación y heridas. Atención humana y profesional disponible 24/7. Luiggi Castañeda, Auxiliar de Enfermería."
+  professionalName="Luiggi Castañeda"
+>
   {/* Ajustamos max-w-md a max-w-7xl para permitir expansión en PC */}
   <div class="relative flex h-auto w-full max-w-7xl mx-auto flex-col bg-background-light dark:bg-background-dark md:shadow-2xl md:min-h-screen">
     
-    {/* ===== HEADER (Solo Visible en PC) ===== */}
-    <header class="hidden md:flex sticky top-0 z-50 items-center bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-xl p-4 justify-between border-b border-slate-200/50 dark:border-slate-800/50 px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-all">
-      <nav class="flex gap-8 items-center flex-1">
-         <h2 class="text-slate-900 dark:text-slate-100 text-2xl font-black leading-tight tracking-tight text-primary hover:scale-[1.02] transition-transform cursor-pointer">
-            Enfermero Luggi
-         </h2>
-         <div class="w-px h-6 bg-slate-300 dark:bg-slate-700 mx-2"></div>
-         <a href="#servicios" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors">Servicios</a>
-         <a href="#perfil" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors">Conóceme</a>
-         <a href="#testimonios" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-medium transition-colors">Testimonios</a>
-      </nav>
-      <div class="flex items-center gap-4">
-        <a class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-5 py-2.5 rounded-full font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" href="tel:+573507871980">
-           <span class="material-symbols-outlined text-[20px]">call</span>
-           Llamar Ahora
-        </a>
-      </div>
-    </header>
-
-    {/* ===== HEADER CLÁSICO (Para espacio seguro superior en móvil) ===== */}
-    <header class="md:hidden flex items-center bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-md p-4 border-b border-slate-200 dark:border-slate-800">
-      <h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">
-        Enfermero Luggi
-      </h2>
-    </header>
+    {/* ===== HEADER RESPONSIVE (React con scroll effect) ===== */}
+    <Header baseUrl={import.meta.env.BASE_URL} client:load />
 
     {/* ===== MAIN CONTENT ===== */}
     <main class="w-full pb-24 md:pb-12 flex-1">
       
-      {/* SECTION: HERO */}
-      <div id="inicio" class="p-6 md:p-8 scroll-mt-24">
-        <div class="relative flex flex-col md:flex-row gap-8 md:gap-12 overflow-hidden rounded-[2.5rem] bg-surface-dark shadow-2xl md:h-[500px] lg:h-[650px] items-center md:items-stretch justify-end md:justify-start" >
-          
-          <div class="absolute inset-0 md:hidden z-0">
-             <div class="w-full h-1/2 bg-cover bg-top bg-no-repeat" style={`background-image: url("${import.meta.env.BASE_URL}/assets/hero.webp");`}></div>
-             <div class="w-full h-1/2 bg-surface-dark mt-[-2px]"></div>
-             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface-dark/95 to-surface-dark"></div>
-          </div>
-          
-          <div class="hidden md:block w-1/2 h-full bg-cover bg-center rounded-r-3xl" style={`background-image: url("${import.meta.env.BASE_URL}/assets/hero.webp");`}>
-          </div>
-
-          <div class="absolute top-4 right-4 flex gap-1.5 z-20 md:hidden">
-            <div class="w-1.5 h-1.5 rounded-full bg-white/40 backdrop-blur-sm"></div>
-            <div class="w-6 h-1.5 rounded-full bg-white backdrop-blur-sm"></div>
-            <div class="w-1.5 h-1.5 rounded-full bg-white/40 backdrop-blur-sm"></div>
-          </div>
-          
-          <div class="flex flex-col gap-4 text-left md:text-left z-10 w-full p-6 md:p-12 md:w-1/2 md:justify-center min-h-[420px] md:min-h-0 pt-48 sm:pt-64 md:pt-12">
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 md:bg-primary/20 text-white md:text-primary-dark dark:text-primary text-xs font-bold rounded-full w-fit backdrop-blur-sm border border-white/20 md:border-primary/20 self-center md:self-start mb-2 md:mb-0">
-              <span class="material-symbols-outlined text-[16px]">favorite</span>
-              <span>Acompañamiento Humano</span>
-            </div>
-            <h1 class="text-white md:text-surface-dark dark:md:text-white text-[2.75rem] leading-[1.05] md:text-5xl lg:text-7xl font-black tracking-tight mb-3 drop-shadow-md md:drop-shadow-none text-center md:text-left">
-              Cuidado Integral en Casa
-            </h1>
-            <p class="text-slate-200 md:text-slate-600 dark:md:text-slate-300 text-lg md:text-xl lg:text-2xl font-medium leading-relaxed max-w-[95%] mx-auto md:mx-0 md:max-w-xl drop-shadow-sm md:drop-shadow-none mb-2 text-center md:text-left">
-              Su bienestar es nuestra prioridad. Enfermería profesional con calidez y dedicación en Bogotá.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 mt-4 md:mt-8 items-center md:items-start">
-                <a href="https://wa.me/573507871980?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20Enfermer%C3%ADa%20y%20Cuidado%20en%20Casa.%20%F0%9F%A9%BA" class="w-full sm:w-fit h-14 px-8 rounded-2xl bg-green-500 hover:bg-green-600 active:scale-95 text-white font-bold text-base md:text-lg flex items-center justify-center gap-2 shadow-[0_8px_30px_rgba(34,197,94,0.3)] hover:shadow-[0_8px_40px_rgba(34,197,94,0.5)] hover:-translate-y-1 transition-all cursor-pointer">
-                <svg fill="currentColor" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-                Contactar por WhatsApp
-                </a>
-            </div>
-          </div>
-        </div>
+      {/* SECTION: HERO - Componente React con client:load para animaciones */}
+      <div id="inicio" class="scroll-mt-24">
+        <Hero
+          baseUrl={import.meta.env.BASE_URL}
+          client:load
+        />
       </div>
 
-      {/* SECTION: STATS */}
-      <div class="flex flex-wrap justify-center gap-10 md:gap-24 px-6 py-10 border-y border-slate-200 dark:border-slate-800 mx-6 md:mx-8 mb-12">
-        <div class="flex flex-col items-center min-w-[100px]">
-          <span class="text-primary font-black text-3xl md:text-4xl">10+</span>
-          <span class="text-slate-500 dark:text-slate-400 text-xs md:text-sm uppercase tracking-widest font-bold mt-2">Años Exp.</span>
-        </div>
-        <div class="hidden sm:block w-px h-14 bg-slate-200 dark:bg-slate-700"></div>
-        <div class="flex flex-col items-center min-w-[100px]">
-          <span class="text-primary font-black text-3xl md:text-4xl">24/7</span>
-          <span class="text-slate-500 dark:text-slate-400 text-xs md:text-sm uppercase tracking-widest font-bold mt-2">Disponibilidad</span>
-        </div>
-        <div class="hidden sm:block w-px h-14 bg-slate-200 dark:bg-slate-700"></div>
-        <div class="flex flex-col items-center min-w-[100px]">
-          <span class="text-primary font-black text-3xl md:text-4xl">100%</span>
-          <span class="text-slate-500 dark:text-slate-400 text-xs md:text-sm uppercase tracking-widest font-bold mt-2">Confiable</span>
-        </div>
-      </div>
+      {/* TRUST BANNER: Franja de autoridad entre Hero y Servicios */}
+      <TrustBanner />
 
-      {/* SECTION: SERVICES */}
-      <div id="servicios" class="flex flex-col gap-6 px-4 md:px-8 py-8 md:py-16 scroll-mt-20">
-        <div class="flex items-center justify-between mb-2">
-          <div class="max-w-xl">
-             <h3 class="text-slate-900 dark:text-slate-100 text-2xl md:text-3xl font-black leading-tight mb-2">Mis Servicios</h3>
-             <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base">Brindo atención especializada y humana para asegurar el bienestar integral de tus seres queridos en su propio hogar.</p>
-          </div>
-          <a class="hidden md:flex text-primary text-base font-semibold hover:underline items-center gap-1" href="#contacto">
-              Consultar tarifas <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-          </a>
-        </div>
+      {/* SECTION: SERVICES - Grid de 6 tarjetas con animaciones framer-motion */}
+      <ServicesGrid client:load />
+
+      {/* SECTION: SOBRE MÍ - Conexión emocional con framer-motion */}
+      <AboutMe baseUrl={import.meta.env.BASE_URL} client:load />
+
+      {/* SECTION: TESTIMONIOS - Social Proof con Schema.org AggregateRating */}
+      <Testimonials client:load />
+      
+      {/* SECTION: FAQ - Preguntas Frecuentes con acordeón y SEO JSON-LD */}
+      <FAQ client:load />
+
+      {/* SECTION: LOCATION - Zona de Cobertura Bogotá */}
+      <section id="contacto" class="px-5 sm:px-8 py-20 bg-white flex flex-col items-center text-center">
+        <span class="inline-block text-teal-600 font-bold uppercase text-[10px] tracking-[0.2em] mb-3">Zona de Cobertura</span>
+        <h2 class="text-slate-900 text-3xl md:text-4xl font-extrabold mb-10">Atención en Bogotá & Sabana</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <div class="group flex flex-col md:flex-row items-start md:items-center gap-5 rounded-[2rem] bg-surface-light dark:bg-surface-dark p-8 shadow-sm hover:shadow-[0_10px_40px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_10px_40px_rgba(0,0,0,0.2)] border border-slate-100 dark:border-slate-800 hover:border-primary/40 dark:hover:border-primary/40 transition-all duration-300 cursor-pointer hover:-translate-y-1">
-            <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-blue-50/80 dark:bg-slate-800/80 text-primary group-hover:bg-primary group-hover:text-white group-hover:rotate-3 transition-all duration-300">
-              <span class="material-symbols-outlined text-[36px]">medication</span>
-            </div>
-            <div class="flex flex-col flex-1">
-              <h4 class="text-slate-900 dark:text-slate-100 text-xl font-bold group-hover:text-primary dark:group-hover:text-primary transition-colors">Administración de Medicamentos</h4>
-              <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed mt-2 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">Gestión segura y puntual de tratamientos orales e intravenosos.</p>
-            </div>
-          </div>
-          
-          <div class="group flex flex-col md:flex-row items-start md:items-center gap-4 rounded-3xl bg-surface-light dark:bg-surface-dark p-6 shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md hover:border-red-500/30 transition-all cursor-pointer">
-            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-red-50 dark:bg-slate-800/50 text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors">
-              <span class="material-symbols-outlined text-[32px]">monitor_heart</span>
-            </div>
-            <div class="flex flex-col flex-1">
-              <h4 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Monitoreo de Signos Vitales</h4>
-              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mt-1">Control constante de presión, oxigenación y glucosa.</p>
-            </div>
-          </div>
-
-          <div class="group flex flex-col md:flex-row items-start md:items-center gap-4 rounded-3xl bg-surface-light dark:bg-surface-dark p-6 shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md hover:border-teal-600/30 transition-all cursor-pointer">
-            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-teal-50 dark:bg-slate-800/50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors">
-              <span class="material-symbols-outlined text-[32px]">medical_services</span>
-            </div>
-            <div class="flex flex-col flex-1">
-              <h4 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Cuidados Post-operatorios</h4>
-              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mt-1">Recuperación asistida en casa con manejo de heridas y curaciones.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* SECTION: PROFILE (Responsivo) */}
-      <div id="perfil" class="px-6 md:px-8 py-16 md:py-24 scroll-mt-24">
-        <div class="bg-gradient-to-br from-primary/5 via-surface-light dark:via-surface-dark to-transparent rounded-[3rem] p-10 md:p-14 md:py-16 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-12 border border-primary/10 hover:border-primary/20 transition-colors shadow-sm hover:shadow-lg">
-          <div class="relative shrink-0 group cursor-pointer">
-            <div class="h-64 w-48 md:h-80 md:w-64 rounded-[2.5rem] bg-cover bg-top border-[6px] border-surface-light dark:border-surface-dark shadow-2xl group-hover:scale-[1.03] transition-transform duration-500" style={`background-image: url("${import.meta.env.BASE_URL}/assets/perfil.webp");`}></div>
-            <div class="absolute bottom-2 right-2 md:bottom-6 md:right-6 bg-green-500 border-4 border-surface-light dark:border-surface-dark rounded-full h-10 w-10 md:h-12 md:w-12 flex items-center justify-center shadow-[0_4px_20px_rgba(34,197,94,0.4)] group-hover:scale-110 transition-transform">
-              <span class="material-symbols-outlined text-white text-[20px] md:text-[24px] font-bold">check</span>
-            </div>
-          </div>
-          <div class="flex flex-col gap-4 md:pt-4">
-            <div>
-               <h2 class="text-slate-900 dark:text-slate-100 text-2xl md:text-4xl font-black">Luggi Castañeda</h2>
-               <p class="text-primary font-bold text-base md:text-lg mt-1">Auxiliar de Enfermería</p>
-            </div>
-            <p class="text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl italic font-medium">
-              "Con más de 5 años de experiencia en cuidado geriátrico, me dedico a mejorar la calidad de vida de sus seres queridos con paciencia, amor y estricto rigor profesional."
-            </p>
-            <div class="flex gap-2 flex-wrap justify-center md:justify-start mt-2">
-              <div class="flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm">
-                 <span class="material-symbols-outlined text-green-500 text-[18px]">verified</span>
-                 Referencias Verificables
+        <div class="w-full max-w-4xl h-64 md:h-80 rounded-[3rem] bg-slate-100 relative overflow-hidden shadow-2xl border-8 border-white group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0" style={`background-image: url("${import.meta.env.BASE_URL}/assets/mapa_bogota.png");`}></div>
+          <div class="absolute inset-0 bg-slate-900/10 flex items-center justify-center backdrop-blur-[2px]">
+            <div class="bg-white/95 backdrop-blur-md px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-4 text-slate-900 border border-white/20">
+              <div class="h-10 w-10 flex items-center justify-center bg-teal-500 text-white rounded-full">
+                <span class="material-symbols-outlined text-[24px]">location_on</span>
               </div>
-              <div class="flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm">
-                 <span class="material-symbols-outlined text-red-500 text-[18px]">favorite</span>
-                 RCP Avanzado
+              <div class="text-left">
+                <p class="text-xs font-bold text-teal-600 uppercase tracking-widest leading-none mb-1">Disponible en</p>
+                <p class="text-lg md:text-xl font-black leading-none">Bogotá D.C. & Sabana</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* SECTION: TESTIMONIALS (Responsivo) */}
-      <div id="testimonios" class="px-6 md:px-8 py-16 md:py-20 mb-8 scroll-mt-24">
-        <h3 class="text-slate-900 dark:text-slate-100 text-3xl md:text-4xl font-black mb-10 text-center md:text-left">Lo que dicen las familias</h3>
         
-        <div class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          
-          <div class="bg-surface-light dark:bg-surface-dark p-8 md:p-10 rounded-[2.5rem] shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6 transition-shadow">
-            <div class="flex gap-1 text-yellow-400">
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-            </div>
-            <p class="text-slate-700 dark:text-slate-300 text-base leading-relaxed italic">"Excelente servicio, María fue un ángel para mi papá durante su recuperación. Muy paciente y siempre profesional."</p>
-            <div class="flex items-center gap-3 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800">
-              <div class="h-10 w-10 rounded-full bg-blue-100 dark:bg-slate-700 flex items-center justify-center text-sm font-bold text-blue-700 dark:text-slate-300">CR</div>
-              <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Familia Rodríguez</span>
-            </div>
-          </div>
-          
-          <div class="bg-surface-light dark:bg-surface-dark p-8 md:p-10 rounded-[2.5rem] shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6 transition-shadow">
-            <div class="flex gap-1 text-yellow-400">
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-            </div>
-            <p class="text-slate-700 dark:text-slate-300 text-base leading-relaxed italic">"Puntual y muy cariñosa con mi mamá. Nos dio mucha tranquilidad saber que estaba en buenas manos día y noche."</p>
-            <div class="flex items-center gap-3 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800">
-              <div class="h-10 w-10 rounded-full bg-pink-100 dark:bg-slate-700 flex items-center justify-center text-sm font-bold text-pink-700 dark:text-slate-300">AG</div>
-              <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Ana Gómez</span>
-            </div>
-          </div>
-          
-           <div class="bg-surface-light dark:bg-surface-dark p-8 md:p-10 rounded-[2.5rem] shadow-sm hover:shadow-xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6 transition-shadow">
-            <div class="flex gap-1 text-yellow-400">
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-              <span class="material-symbols-outlined text-[20px] fill-current">star</span>
-            </div>
-            <p class="text-slate-700 dark:text-slate-300 text-base leading-relaxed italic">"Su conocimiento y carisma hacen la diferencia. La recomiendo a ojo cerrado para cuidados postoperatorios."</p>
-            <div class="flex items-center gap-3 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800">
-              <div class="h-10 w-10 rounded-full bg-emerald-100 dark:bg-slate-700 flex items-center justify-center text-sm font-bold text-emerald-700 dark:text-slate-300">JL</div>
-              <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Jorge López</span>
-            </div>
-          </div>
+        <p class="text-slate-500 text-sm font-medium mt-10 max-w-lg">
+          ¿Atención en Chía, Cajicá o Soacha? <br class="hidden sm:block" />
+          <a href="#inicio" class="text-teal-600 font-bold hover:underline transition-all">Consúltame por WhatsApp directamente →</a>
+        </p>
+      </section>
 
-        </div>
-      </div>
-
-      {/* SECTION: LOCATION & FOOTER INFO */}
-      <div id="contacto" class="px-6 md:px-8 pb-20 md:pb-32 flex flex-col items-center text-center gap-6">
-        <h3 class="text-slate-900 dark:text-slate-100 text-3xl font-black w-full text-center mb-4">Zona de Cobertura</h3>
-        <div class="w-full md:w-3/4 lg:w-1/2 h-56 md:h-72 rounded-[2.5rem] bg-slate-200 dark:bg-slate-800 bg-cover bg-center md:bg-top mb-6 relative overflow-hidden shadow-lg border-4 border-surface-light dark:border-surface-dark" style={`background-image: url("${import.meta.env.BASE_URL}/assets/mapa_bogota.png");`}>
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center backdrop-blur-sm">
-            <div class="bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-md px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-3 text-base md:text-lg font-black border border-white/20">
-              <span class="material-symbols-outlined text-primary text-[28px]">location_on</span>
-              Bogotá Norte & Chapinero
-            </div>
-          </div>
-        </div>
-        <p class="text-slate-500 text-sm md:text-base font-medium mt-4">© 2024 Enfermero Luggi Castañeda. Todos los derechos reservados.</p>
-      </div>
     </main>
 
-    {/* ===== BOTTOM NAVIGATION BAR MENU (Solo Visible en móvil) ===== */}
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-light/90 dark:bg-surface-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 z-50 pt-3 pb-safe-bottom shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-      <div class="flex justify-around items-center px-2 pb-2">
-        <a href="#inicio" class="flex flex-col items-center gap-1 group text-primary">
-          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform fill-current">home</span>
-          <span class="text-[10px] font-bold">Inicio</span>
-        </a>
-        <a href="#servicios" class="flex flex-col items-center gap-1 group text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
-          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">medical_services</span>
-          <span class="text-[10px] font-bold">Servicios</span>
-        </a>
-        
-        {/* ACTION BUTTON CENTRAL */}
-        <div class="relative -top-8">
-            <a href="https://wa.me/573507871980?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20Enfermer%C3%ADa%20y%20Cuidado%20en%20Casa.%20%F0%9F%A9%BA" class="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-green-500 active:bg-green-600 active:scale-95 text-white shadow-[0_8px_30px_rgba(34,197,94,0.4)] transform hover:-translate-y-2 transition-all duration-300 border-[6px] border-surface-light/90 dark:border-surface-dark/95">
-               <svg fill="currentColor" height="32px" viewBox="0 0 24 24" width="32px" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-            </a>
-        </div>
+    {/* ===== FOOTER PREMIUM: Branding + NAP SEO + Legal ===== */}
+    <Footer client:load />
 
-        <a href="#perfil" class="flex flex-col items-center gap-1 group text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
-          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">person</span>
-          <span class="text-[10px] font-bold">Perfil</span>
-        </a>
-        <a href="#testimonios" class="flex flex-col items-center gap-1 group text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
-          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">star</span>
-          <span class="text-[10px] font-bold">Reseñas</span>
-        </a>
-      </div>
-    </nav>
+    {/* ===== MOBILE NAV ESTILO APP (Solo en móvil) ===== */}
+    <MobileNav client:load />
     
   </div>
+
+  {/* Botón flotante de WhatsApp (visible en desktop, sobre el nav móvil en mobile) */}
+  <WhatsAppButton
+    phoneNumber="573507871980"
+    message="Hola, Luiggi! Necesito una valoración de enfermería en Bogotá. 🩺"
+    client:load
+  />
 </Layout>

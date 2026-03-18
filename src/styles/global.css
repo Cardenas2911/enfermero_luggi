@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Fuerza modo claro siempre: dark: solo activa con la clase .dark en el HTML */
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-display: 'Lexend', sans-serif;
     --font-body: 'Lexend', sans-serif;
