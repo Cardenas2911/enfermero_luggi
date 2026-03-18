@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://cardenas2911.github.io',
-  base: '/enfermero_luggi',
+  base: '/enfermero_luiggi',
 
   vite: {
     plugins: [tailwindcss()]
